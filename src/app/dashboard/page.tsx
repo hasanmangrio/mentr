@@ -65,19 +65,18 @@ export default function DashboardPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0f]">
-      {/* Sidebar + main layout */}
+    <div className="min-h-screen bg-[#f7f7f7]">
       <div className="flex h-screen">
         {/* Sidebar */}
-        <aside className="w-60 border-r border-[#2a2a3e] flex flex-col p-4 shrink-0">
-          <Link href="/" className="flex items-center gap-2 mb-8 px-2">
-            <div className="w-7 h-7 rounded-lg bg-[#6c63ff] flex items-center justify-center">
-              <Target className="w-3.5 h-3.5 text-white" />
-            </div>
-            <span className="font-bold text-[#f0f0f5]">Mentr</span>
+        <aside className="w-56 bg-white border-r border-[#DDDDDD] flex flex-col p-4 shrink-0">
+          <Link href="/" className="flex items-center gap-1 mb-8 px-2">
+            <svg width="22" height="24" viewBox="0 0 30 32" fill="none">
+              <path d="M15 2C15 2 6 12 6 19C6 23.4 10.1 27 15 27C19.9 27 24 23.4 24 19C24 12 15 2 15 2Z" fill="#FF385C" />
+            </svg>
+            <span className="font-bold text-[#FF385C]">mentr</span>
           </Link>
 
-          <nav className="space-y-1 flex-1">
+          <nav className="space-y-0.5 flex-1">
             {[
               { icon: BarChart3, label: "Dashboard", active: true, href: "/dashboard" },
               { icon: Target, label: "My goals", active: false, href: "/dashboard" },
@@ -88,10 +87,10 @@ export default function DashboardPage() {
               <Link
                 key={item.label}
                 href={item.href}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-150 ${
                   item.active
-                    ? "bg-[#6c63ff]/15 text-[#a78bfa] border border-[#6c63ff]/20"
-                    : "text-[#6b6b80] hover:text-[#f0f0f5] hover:bg-[#1a1a2e]"
+                    ? "bg-[#FFF0F2] text-[#FF385C]"
+                    : "text-[#717171] hover:text-[#222222] hover:bg-[#f7f7f7]"
                 }`}
               >
                 <item.icon className="w-4 h-4" />
@@ -100,28 +99,28 @@ export default function DashboardPage() {
             ))}
           </nav>
 
-          {/* Today's streak */}
-          <div className="border border-[#2a2a3e] rounded-xl p-4 mt-4">
+          {/* Streak widget */}
+          <div className="border border-[#EBEBEB] rounded-xl p-4 bg-[#f7f7f7]">
             <div className="flex items-center gap-2 mb-1">
-              <Flame className="w-4 h-4 text-orange-400" />
-              <span className="text-sm font-semibold text-[#f0f0f5]">12-day streak</span>
+              <Flame className="w-4 h-4 text-[#FC642D]" />
+              <span className="text-sm font-semibold text-[#222222]">12-day streak</span>
             </div>
-            <p className="text-xs text-[#6b6b80]">Keep it going — don't break the chain</p>
+            <p className="text-xs text-[#717171]">Don't break the chain</p>
           </div>
         </aside>
 
-        {/* Main content */}
+        {/* Main */}
         <main className="flex-1 overflow-auto">
           <div className="p-8 max-w-5xl">
             {/* Top bar */}
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h1 className="text-2xl font-black text-[#f0f0f5]">Today's mission</h1>
-                <p className="text-[#6b6b80] text-sm mt-0.5">Monday, May 18 · Week 3 of 12</p>
+                <h1 className="text-2xl font-extrabold text-[#222222]">Today's mission</h1>
+                <p className="text-sm text-[#717171] mt-0.5">Monday, May 18 · Week 3 of 12</p>
               </div>
               <div className="flex items-center gap-3">
                 <Badge variant="success">On track</Badge>
-                <Button size="sm" asChild>
+                <Button size="sm" className="rounded-lg" asChild>
                   <Link href="/checkin">
                     <MessageSquare className="w-4 h-4 mr-2" />
                     Check-in with AI
@@ -133,106 +132,100 @@ export default function DashboardPage() {
             {/* Stats row */}
             <div className="grid grid-cols-4 gap-4 mb-6">
               {[
-                { label: "Today", value: `${completedCount}/${tasks.length}`, sub: "tasks done", icon: CheckCircle2, color: "#34d399" },
-                { label: "Streak", value: "12", sub: "days", icon: Flame, color: "#f59e0b" },
-                { label: "This week", value: "81%", sub: "completion", icon: TrendingUp, color: "#6c63ff" },
-                { label: "Goal pace", value: "3 wks", sub: "ahead of schedule", icon: Zap, color: "#a78bfa" },
+                { label: "Today", value: `${completedCount}/${tasks.length}`, sub: "tasks done", icon: CheckCircle2, color: "#FF385C" },
+                { label: "Streak", value: "12", sub: "days", icon: Flame, color: "#FC642D" },
+                { label: "This week", value: "81%", sub: "completion", icon: TrendingUp, color: "#00A699" },
+                { label: "Goal pace", value: "3 wks", sub: "ahead of schedule", icon: Zap, color: "#FFB400" },
               ].map((stat) => (
-                <Card key={stat.label} className="hover:border-[#6c63ff]/30 transition-colors">
-                  <CardContent className="p-4">
+                <Card key={stat.label}>
+                  <CardContent className="p-5">
                     <div className="flex items-center justify-between mb-3">
-                      <span className="text-xs text-[#6b6b80] font-medium uppercase tracking-wide">{stat.label}</span>
-                      <div
-                        className="w-7 h-7 rounded-lg flex items-center justify-center"
-                        style={{ backgroundColor: `${stat.color}20` }}
-                      >
+                      <span className="text-xs text-[#717171] font-medium uppercase tracking-wide">{stat.label}</span>
+                      <div className="w-7 h-7 rounded-lg bg-[#f7f7f7] flex items-center justify-center">
                         <stat.icon className="w-3.5 h-3.5" style={{ color: stat.color }} />
                       </div>
                     </div>
-                    <p className="text-2xl font-black text-[#f0f0f5]">{stat.value}</p>
-                    <p className="text-xs text-[#6b6b80] mt-0.5">{stat.sub}</p>
+                    <p className="text-2xl font-extrabold text-[#222222]">{stat.value}</p>
+                    <p className="text-xs text-[#717171] mt-0.5">{stat.sub}</p>
                   </CardContent>
                 </Card>
               ))}
             </div>
 
             <div className="grid grid-cols-3 gap-6">
-              {/* Task list */}
-              <div className="col-span-2 space-y-4">
+              {/* Task list + chat */}
+              <div className="col-span-2 space-y-5">
                 <Card>
-                  <CardHeader className="pb-3">
+                  <CardHeader className="pb-3 border-b border-[#EBEBEB]">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-base">Today's tasks</CardTitle>
+                      <CardTitle>Today's tasks</CardTitle>
                       <div className="flex items-center gap-3">
-                        <div className="text-sm text-[#6b6b80]">{completionPct}%</div>
-                        <div className="w-24 h-1.5 bg-[#2a2a3e] rounded-full overflow-hidden">
+                        <span className="text-xs text-[#717171]">{completedCount}/{tasks.length} done</span>
+                        <div className="w-24 h-1.5 bg-[#EBEBEB] rounded-full overflow-hidden">
                           <div
-                            className="h-full bg-[#6c63ff] rounded-full transition-all duration-500"
+                            className="h-full bg-[#FF385C] rounded-full transition-all duration-500"
                             style={{ width: `${completionPct}%` }}
                           />
                         </div>
                       </div>
                     </div>
                   </CardHeader>
-                  <CardContent className="space-y-2">
+                  <CardContent className="pt-3 space-y-1">
                     {tasks.map((task) => (
                       <button
                         key={task.id}
                         onClick={() => toggleTask(task.id)}
-                        className={`w-full flex items-start gap-3 p-3 rounded-xl text-left transition-all duration-200 group ${
-                          task.done ? "opacity-60" : "hover:bg-[#1a1a2e]"
+                        className={`w-full flex items-start gap-3 p-3 rounded-lg text-left transition-all duration-150 group ${
+                          task.done ? "opacity-50" : "hover:bg-[#f7f7f7]"
                         }`}
                       >
                         {task.done ? (
-                          <CheckCircle2 className="w-5 h-5 text-[#34d399] flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-5 h-5 text-[#FF385C] flex-shrink-0 mt-0.5" />
                         ) : (
-                          <Circle className="w-5 h-5 text-[#2a2a3e] group-hover:text-[#6c63ff] flex-shrink-0 mt-0.5 transition-colors" />
+                          <Circle className="w-5 h-5 text-[#DDDDDD] group-hover:text-[#FF385C] flex-shrink-0 mt-0.5 transition-colors" />
                         )}
-                        <div className="flex-1">
-                          <p className={`text-sm font-medium ${task.done ? "line-through text-[#6b6b80]" : "text-[#f0f0f5]"}`}>
+                        <div>
+                          <p className={`text-sm font-medium ${task.done ? "line-through text-[#b0b0b0]" : "text-[#222222]"}`}>
                             {task.task}
                           </p>
-                          <span className="text-xs text-[#6b6b80]">{task.category}</span>
+                          <span className="text-xs text-[#717171]">{task.category}</span>
                         </div>
                       </button>
                     ))}
-                    <button className="w-full flex items-center gap-3 p-3 rounded-xl text-[#6b6b80] hover:text-[#6c63ff] hover:bg-[#1a1a2e] transition-all text-sm mt-2">
+                    <button className="w-full flex items-center gap-3 p-3 rounded-lg text-[#717171] hover:text-[#FF385C] hover:bg-[#f7f7f7] transition-all text-sm">
                       <Plus className="w-4 h-4" />
                       Add a task
                     </button>
                   </CardContent>
                 </Card>
 
-                {/* AI check-in preview */}
+                {/* Check-in preview */}
                 <Card>
-                  <CardHeader className="pb-3">
+                  <CardHeader className="pb-3 border-b border-[#EBEBEB]">
                     <div className="flex items-center justify-between">
-                      <CardTitle className="text-base">Morning check-in</CardTitle>
-                      <Link href="/checkin" className="text-xs text-[#6c63ff] hover:text-[#a78bfa] flex items-center gap-1 transition-colors">
+                      <CardTitle>Morning check-in</CardTitle>
+                      <Link href="/checkin" className="text-xs text-[#FF385C] hover:underline flex items-center gap-1">
                         Open full chat <ArrowUpRight className="w-3 h-3" />
                       </Link>
                     </div>
                   </CardHeader>
-                  <CardContent className="space-y-3">
+                  <CardContent className="pt-4 space-y-3">
                     {recentMessages.map((msg, i) => (
-                      <div
-                        key={i}
-                        className={`flex gap-3 ${msg.from === "user" ? "justify-end" : ""}`}
-                      >
+                      <div key={i} className={`flex gap-2.5 ${msg.from === "user" ? "justify-end" : ""}`}>
                         {msg.from === "ai" && (
-                          <div className="w-7 h-7 rounded-full bg-[#6c63ff]/20 border border-[#6c63ff]/30 flex items-center justify-center flex-shrink-0 mt-0.5">
-                            <Zap className="w-3 h-3 text-[#6c63ff]" />
+                          <div className="w-7 h-7 rounded-full bg-[#FFF0F2] border border-[#FFD0D8] flex items-center justify-center flex-shrink-0 mt-0.5">
+                            <Zap className="w-3 h-3 text-[#FF385C]" />
                           </div>
                         )}
                         <div
                           className={`max-w-sm rounded-2xl px-4 py-3 text-sm ${
                             msg.from === "ai"
-                              ? "bg-[#1a1a2e] text-[#f0f0f5] rounded-tl-sm"
-                              : "bg-[#6c63ff]/20 text-[#f0f0f5] rounded-tr-sm border border-[#6c63ff]/20"
+                              ? "bg-[#f7f7f7] text-[#222222] rounded-tl-sm"
+                              : "bg-[#222222] text-white rounded-tr-sm"
                           }`}
                         >
                           <p className="leading-relaxed">{msg.message}</p>
-                          <p className="text-xs text-[#6b6b80] mt-1.5">{msg.time}</p>
+                          <p className={`text-xs mt-1.5 ${msg.from === "ai" ? "text-[#b0b0b0]" : "text-white/50"}`}>{msg.time}</p>
                         </div>
                       </div>
                     ))}
@@ -241,41 +234,43 @@ export default function DashboardPage() {
               </div>
 
               {/* Right column */}
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {/* Roadmap */}
                 <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-base">Roadmap</CardTitle>
+                  <CardHeader className="pb-3 border-b border-[#EBEBEB]">
+                    <CardTitle>Roadmap</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-2">
+                  <CardContent className="pt-3 space-y-2">
                     {weekMilestones.map((m) => (
                       <div
                         key={m.week}
-                        className={`flex items-start gap-3 p-2 rounded-lg ${m.current ? "bg-[#6c63ff]/10 border border-[#6c63ff]/20" : ""}`}
+                        className={`flex items-start gap-3 p-2.5 rounded-lg ${m.current ? "bg-[#FFF0F2] border border-[#FFD0D8]" : ""}`}
                       >
                         <div className={`w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5 ${
-                          m.done ? "bg-[#34d399]/20" : m.current ? "bg-[#6c63ff]/20" : "bg-[#2a2a3e]"
+                          m.done ? "bg-[#F0FFF4]" : m.current ? "bg-[#FFF0F2]" : "bg-[#f7f7f7]"
                         }`}>
                           {m.done ? (
-                            <CheckCircle2 className="w-3 h-3 text-[#34d399]" />
+                            <CheckCircle2 className="w-3 h-3 text-[#276749]" />
                           ) : m.current ? (
-                            <Clock className="w-3 h-3 text-[#6c63ff]" />
+                            <Clock className="w-3 h-3 text-[#FF385C]" />
                           ) : (
-                            <Circle className="w-3 h-3 text-[#6b6b80]" />
+                            <Circle className="w-3 h-3 text-[#DDDDDD]" />
                           )}
                         </div>
-                        <div>
-                          <p className="text-xs text-[#6b6b80]">Week {m.week}</p>
-                          <p className={`text-xs font-medium ${m.current ? "text-[#a78bfa]" : m.done ? "text-[#6b6b80] line-through" : "text-[#f0f0f5]"}`}>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs text-[#b0b0b0]">Week {m.week}</p>
+                          <p className={`text-xs font-medium truncate ${
+                            m.current ? "text-[#FF385C]" : m.done ? "text-[#b0b0b0] line-through" : "text-[#222222]"
+                          }`}>
                             {m.milestone}
                           </p>
                         </div>
                         {m.current && (
-                          <Badge className="ml-auto text-xs px-2 py-0.5">Now</Badge>
+                          <span className="text-xs bg-[#FF385C] text-white px-2 py-0.5 rounded-full font-medium flex-shrink-0">Now</span>
                         )}
                       </div>
                     ))}
-                    <button className="w-full flex items-center justify-between mt-2 text-xs text-[#6b6b80] hover:text-[#6c63ff] transition-colors p-2">
+                    <button className="w-full flex items-center justify-between text-xs text-[#717171] hover:text-[#FF385C] transition-colors p-2 mt-1">
                       View full roadmap <ChevronRight className="w-3 h-3" />
                     </button>
                   </CardContent>
@@ -283,19 +278,19 @@ export default function DashboardPage() {
 
                 {/* Next calendar block */}
                 <Card>
-                  <CardHeader className="pb-3">
-                    <CardTitle className="text-base">Next block</CardTitle>
+                  <CardHeader className="pb-3 border-b border-[#EBEBEB]">
+                    <CardTitle>Next block</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <div className="bg-[#6c63ff]/10 border border-[#6c63ff]/20 rounded-xl p-4">
+                  <CardContent className="pt-4">
+                    <div className="bg-[#FFF0F2] border border-[#FFD0D8] rounded-xl p-4">
                       <div className="flex items-center gap-2 mb-2">
-                        <Calendar className="w-4 h-4 text-[#6c63ff]" />
-                        <span className="text-xs text-[#a78bfa] font-medium">2:00 PM – 4:00 PM</span>
+                        <Calendar className="w-4 h-4 text-[#FF385C]" />
+                        <span className="text-xs text-[#FF385C] font-semibold">2:00 PM – 4:00 PM</span>
                       </div>
-                      <p className="text-sm font-semibold text-[#f0f0f5]">Deep work: Stripe Integration</p>
-                      <p className="text-xs text-[#6b6b80] mt-1">Blocked by Mentr · 2 hours</p>
+                      <p className="text-sm font-semibold text-[#222222]">Deep work: Stripe Integration</p>
+                      <p className="text-xs text-[#717171] mt-1">Blocked by Mentr · 2 hours</p>
                     </div>
-                    <button className="w-full mt-3 text-xs text-[#6b6b80] hover:text-[#6c63ff] transition-colors flex items-center justify-center gap-1">
+                    <button className="w-full mt-3 text-xs text-[#717171] hover:text-[#FF385C] transition-colors flex items-center justify-center gap-1">
                       <Calendar className="w-3 h-3" />
                       View in Google Calendar
                     </button>

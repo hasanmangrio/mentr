@@ -6,80 +6,69 @@ const steps = [
   {
     icon: Target,
     number: "01",
-    title: "Set your big goal",
-    description: "Tell Mentr what you want to achieve — launch a startup, lose 20lbs, write a book. Be specific or vague, the AI adapts.",
-    color: "#6c63ff",
+    title: "Set your goal",
+    description: "Tell Mentr what you want to achieve — launch a startup, lose 20 lbs, write a book. Be specific or start vague, the AI adapts to you.",
   },
   {
     icon: Brain,
     number: "02",
-    title: "AI builds your plan",
-    description: "Claude breaks your goal into a week-by-week roadmap with daily milestones. No fluff — just the exact steps that move the needle.",
-    color: "#a78bfa",
+    title: "Get your plan",
+    description: "AI breaks your goal into a week-by-week roadmap with daily tasks. No fluff — only the steps that actually move the needle.",
   },
   {
     icon: Calendar,
     number: "03",
     title: "Calendar gets blocked",
-    description: "Your Google Calendar fills with focused work sessions automatically. Your time is protected before distractions can steal it.",
-    color: "#60a5fa",
+    description: "Your Google Calendar fills with focused work sessions automatically. Time is protected before distractions can steal it.",
   },
   {
     icon: MessageSquare,
     number: "04",
     title: "Daily check-ins",
-    description: "Every morning, your AI manager checks in. Every evening, it reviews your day. Miss a task? It asks why — and pushes back.",
-    color: "#34d399",
+    description: "Every morning your AI manager checks in. Every evening it reviews your day. Miss a task? It asks why — and doesn't let you off the hook.",
   },
   {
     icon: TrendingUp,
     number: "05",
-    title: "Watch the progress stack up",
-    description: "See your streak, your completion rate, and your trajectory toward the goal. The data shows you're closer than you think.",
-    color: "#f59e0b",
+    title: "Watch progress stack",
+    description: "Track your streak, completion rate, and trajectory. The data shows you exactly how close you are — and keeps you honest.",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-24 px-6">
+    <section id="how-it-works" className="py-24 px-6 bg-[#f7f7f7]">
       <div className="max-w-6xl mx-auto">
         <div className="text-center mb-16">
-          <p className="text-[#6c63ff] font-semibold text-sm uppercase tracking-widest mb-3">The system</p>
-          <h2 className="text-4xl md:text-5xl font-black text-[#f0f0f5] mb-4">
-            How Mentr works
+          <p className="text-xs font-semibold text-[#FF385C] uppercase tracking-widest mb-3">How it works</p>
+          <h2 className="text-3xl md:text-4xl font-extrabold text-[#222222] mb-4">
+            From idea to execution in five steps
           </h2>
-          <p className="text-[#a0a0b0] text-lg max-w-2xl mx-auto">
-            Five steps that turn vague ambition into locked-in accountability
+          <p className="text-[#717171] text-lg max-w-xl mx-auto">
+            A structured system that turns vague ambition into locked-in accountability
           </p>
         </div>
 
-        <div className="relative">
-          {/* Connecting line */}
-          <div className="absolute left-8 top-10 bottom-10 w-px bg-gradient-to-b from-[#6c63ff] via-[#60a5fa] to-[#34d399] hidden md:block" />
-
-          <div className="space-y-8">
-            {steps.map((step, index) => (
-              <div key={index} className="flex gap-8 md:pl-0 items-start group">
-                <div className="relative flex-shrink-0">
-                  <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center transition-transform duration-300 group-hover:scale-110"
-                    style={{ backgroundColor: `${step.color}20`, border: `1px solid ${step.color}40` }}
-                  >
-                    <step.icon className="w-7 h-7" style={{ color: step.color }} />
+        {/* Steps grid */}
+        <div className="grid md:grid-cols-5 gap-4">
+          {steps.map((step, i) => (
+            <div key={i} className="relative">
+              {/* Connector line */}
+              {i < steps.length - 1 && (
+                <div className="hidden md:block absolute top-8 left-[calc(100%_-_8px)] w-4 h-px bg-[#DDDDDD] z-10" />
+              )}
+              <div className="bg-white rounded-2xl border border-[#EBEBEB] p-6 h-full hover:border-[#FF385C] hover:shadow-md transition-all duration-200 group">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 rounded-full bg-[#FFF0F2] flex items-center justify-center group-hover:bg-[#FF385C] transition-colors">
+                    <step.icon className="w-4 h-4 text-[#FF385C] group-hover:text-white transition-colors" />
                   </div>
-                  <span className="absolute -top-2 -right-2 text-xs font-black text-[#6b6b80]">
-                    {step.number}
-                  </span>
+                  <span className="text-xs font-bold text-[#b0b0b0]">{step.number}</span>
                 </div>
-
-                <div className="flex-1 pt-2">
-                  <h3 className="text-xl font-bold text-[#f0f0f5] mb-2">{step.title}</h3>
-                  <p className="text-[#a0a0b0] leading-relaxed">{step.description}</p>
-                </div>
+                <h3 className="font-semibold text-[#222222] mb-2">{step.title}</h3>
+                <p className="text-xs text-[#717171] leading-relaxed">{step.description}</p>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
